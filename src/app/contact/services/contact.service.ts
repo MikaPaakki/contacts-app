@@ -8,9 +8,10 @@ export class ContactService {
 
   constructor() {
     this.contacts = [
-      new Contact(1, 'Mika', 'Paakki'),
-      new Contact(2, 'Joku', 'Toinen'),
-      new Contact(3, 'Kolmas', 'Kontakti')
+      new Contact(1, 'Mika', 'Paakki', '0443065347', 'Tienhaara 27', 'Imatra'),
+      new Contact(2, 'Joku', 'Toinen', '045113355', 'Koulukatu 11', 'Lappeenranta'),
+      new Contact(3, 'Kolmas', 'Kontakti', '0400995511', 'Venetie 3', 'Lappeenranta')
+
     ];
   }
   getContacts(): Contact[] {
@@ -18,6 +19,16 @@ export class ContactService {
   }
   addNewContact(contact: Contact) {
     this.contacts.push(contact);
+  }
+  getContactById(id: number): Contact {
+    const index: number = this.contacts.findIndex(c => c.id === id);
+    return this.contacts[index];
+  }
+  saveContact(contact: Contact){
+    //?
+  }
+  deleteContact(contact: Contact){
+    //?
   }
 }
 
