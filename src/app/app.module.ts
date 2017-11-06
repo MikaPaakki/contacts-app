@@ -1,12 +1,31 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
 
-import { AppComponent } from './app.component';
+import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import { ContactListComponent } from './contact/contact-list/contact-list.component';
-import { ContactListItemComponent } from './contact/contact-list/contact-list-item/contact-list-item.component';
+import {ContactListComponent} from './contact/contact-list/contact-list.component';
+import {ContactListItemComponent} from './contact/contact-list/contact-list-item/contact-list-item.component';
 import {MaterialComponentsModule} from './material-components/material-components.module';
 import {ContactService} from './contact/services/contact.service';
+import {RouterModule, Routes} from '@angular/router';
+import {FlexLayoutModule} from '@angular/flex-layout';
+
+const routes: Routes = [
+  {
+    path: '',
+    component: ContactListComponent
+  },
+
+  {
+    path: 'contacts',
+    component: ContactListComponent
+  },
+
+  {
+    path: 'contact-details',
+    component: ContactListComponent
+  }
+]
 
 @NgModule({
   declarations: [
@@ -16,9 +35,12 @@ import {ContactService} from './contact/services/contact.service';
   ],
   imports: [
     BrowserModule,
-    MaterialComponentsModule
+    MaterialComponentsModule,
+    RouterModule.forRoot(routes),
+    FlexLayoutModule
   ],
   providers: [ContactService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
