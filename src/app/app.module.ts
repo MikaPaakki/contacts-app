@@ -9,6 +9,7 @@ import {MaterialComponentsModule} from './material-components/material-component
 import {ContactService} from './contact/services/contact.service';
 import {RouterModule, Routes} from '@angular/router';
 import {FlexLayoutModule} from '@angular/flex-layout';
+import { ContactDetailsComponent } from './contact/contact-details/contact-details.component';
 
 const routes: Routes = [
   {
@@ -23,7 +24,7 @@ const routes: Routes = [
 
   {
     path: 'contact-details',
-    component: ContactListComponent
+    component: ContactDetailsComponent
   }
 ]
 
@@ -31,7 +32,8 @@ const routes: Routes = [
   declarations: [
     AppComponent,
     ContactListComponent,
-    ContactListItemComponent
+    ContactListItemComponent,
+    ContactDetailsComponent
   ],
   imports: [
     BrowserModule,

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Contact} from '../services/contact';
 import {ContactService} from '../services/contact.service';
 
@@ -9,7 +9,11 @@ import {ContactService} from '../services/contact.service';
 })
 export class ContactListComponent implements OnInit {
   contacts: Contact[];
-  constructor(private contactService: ContactService) { }
+
+
+  constructor(private contactService: ContactService) {
+
+  }
 
   ngOnInit() {
     this.contacts = this.contactService.getContacts();
@@ -17,6 +21,11 @@ export class ContactListComponent implements OnInit {
     // For testing purposes only
 
     console.log(this.contactService.getContactById(1));
+  }
+
+  onContactSelected(contact: Contact) {
+    console.log('Selected contact:');
+    console.log(contact);
   }
 
 }

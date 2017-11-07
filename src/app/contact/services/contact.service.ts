@@ -24,12 +24,12 @@ export class ContactService {
     const index: number = this.contacts.findIndex(c => c.id === id);
     return this.contacts[index];
   }
-  saveContact(contact: Contact){
-    //?
+  /*saveContact(contact: Contact){
+   //?
   }
   deleteContact(contact: Contact){
     //?
-  }
+  }*/
 }
 
 
