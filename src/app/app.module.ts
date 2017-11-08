@@ -10,6 +10,7 @@ import {ContactService} from './contact/services/contact.service';
 import {RouterModule, Routes} from '@angular/router';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import { ContactDetailsComponent } from './contact/contact-details/contact-details.component';
+import {FormsModule} from '@angular/forms';
 
 const routes: Routes = [
   {
@@ -23,7 +24,7 @@ const routes: Routes = [
   },
 
   {
-    path: 'contact-details',
+    path: 'contact-details/:id',
     component: ContactDetailsComponent
   }
 ]
@@ -39,7 +40,8 @@ const routes: Routes = [
     BrowserModule,
     MaterialComponentsModule,
     RouterModule.forRoot(routes),
-    FlexLayoutModule
+    FlexLayoutModule,
+    FormsModule
   ],
   providers: [ContactService],
   bootstrap: [AppComponent]

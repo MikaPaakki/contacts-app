@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Contact} from '../services/contact';
 import {ContactService} from '../services/contact.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'ca-contact-list',
@@ -11,7 +12,7 @@ export class ContactListComponent implements OnInit {
   contacts: Contact[];
 
 
-  constructor(private contactService: ContactService) {
+  constructor(private contactService: ContactService, private router: Router) {
 
   }
 
@@ -26,6 +27,7 @@ export class ContactListComponent implements OnInit {
   onContactSelected(contact: Contact) {
     console.log('Selected contact:');
     console.log(contact);
+    this.router.navigate(['/contact-details', contact.id]);
   }
 
 }

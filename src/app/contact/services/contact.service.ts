@@ -22,14 +22,16 @@ export class ContactService {
   }
   getContactById(id: number): Contact {
     const index: number = this.contacts.findIndex(c => c.id === id);
-    return this.contacts[index];
+    let contact = new Contact();
+    Object.assign(contact, this.contacts[index]);
+    return contact;
   }
-  /*saveContact(contact: Contact){
-   //?
+  editContact(contact: Contact) {
   }
-  deleteContact(contact: Contact){
-    //?
-  }*/
+  saveNewContact(contact: Contact) {
+  }
+  deleteContact(contact: Contact) {
+  }
 }
 
 
