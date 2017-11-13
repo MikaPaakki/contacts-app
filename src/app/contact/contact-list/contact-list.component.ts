@@ -17,17 +17,20 @@ export class ContactListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.contacts = this.contactService.getContacts();
+    this.contacts = this.contactService.findContacts();
 
     // For testing purposes only
 
-    console.log(this.contactService.getContactById(1));
+    // console.log(this.contactService.getContactById(1));
   }
 
   onContactSelected(contact: Contact) {
     console.log('Selected contact:');
     console.log(contact);
     this.router.navigate(['/contact-details', contact.id]);
+  }
+  onContactCreate(){
+    this.router.navigate(['/contact-details', 0]);
   }
 
 }

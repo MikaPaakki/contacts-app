@@ -3,6 +3,7 @@
 </p>-->
 
 <div class="ca-contact-form">
+  <h3>{{action}}</h3>
   <mat-form-field class="ca-full-width">
     <input matInput placeholder="First name" value="" [(ngModel)]="contact.firstName">
   </mat-form-field>
@@ -12,5 +13,18 @@
   <mat-form-field class="ca-full-width">
     <input matInput placeholder="Phone number" [(ngModel)]="contact.phoneNumber">
   </mat-form-field>
+  <mat-form-field class="ca-full-width">
+    <input matInput placeholder="Street address" [(ngModel)]="contact.streetAddress">
+  </mat-form-field>
+  <mat-form-field class="ca-full-width">
+    <input matInput placeholder="City" [(ngModel)]="contact.city">
+  </mat-form-field>
 </div>
+<button mat-raised-button *ngIf="contact.id" (click)="deleteContact()">Delete User</button>
+
+<button mat-raised-button *ngIf="contact.id" (click)="editContact()">Edit Contact</button>
+
+<button mat-raised-button *ngIf="!contact.id" (click)="createContact()">Create Contact</button>
+
+<button mat-raised-button (click)="cancelAction()">Cancel</button>
 

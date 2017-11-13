@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Contact} from '../services/contact';
 import {ContactService} from '../services/contact.service';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'ca-contact-details',
@@ -11,8 +11,10 @@ import {ActivatedRoute} from '@angular/router';
 export class ContactDetailsComponent implements OnInit {
 
   contact: Contact;
+  public action: string;
 
-  constructor(private contactService: ContactService, private activatedRoute: ActivatedRoute) {
+  constructor(private contactService: ContactService, private activatedRoute: ActivatedRoute, private router: Router) {
+    this.action = '';
   }
 
   ngOnInit() {
@@ -23,7 +25,13 @@ export class ContactDetailsComponent implements OnInit {
     this.activatedRoute.paramMap.subscribe(parameters => {
       const contactId = Number(parameters.get('id'));
       console.log('contactId: ' + contactId);
-      this.contact = this.findContactById(contactId);
+      if (contactId === 0) {
+        this.action = 'Create contact';
+        this.contact = new Contact();
+      } else {
+        this.action = 'Edit contact';
+        this.contact = this.findContactById(contactId);
+      }
     });
   }
 
@@ -32,15 +40,21 @@ export class ContactDetailsComponent implements OnInit {
 
   }
 
-  editContact(contact: Contact) {
-
+  editContact() {
+    this.contactService.editContact(this.contact);
+    this.router.navigate(['/contacts']);
   }
 
-  saveNewContact(contact: Contact) {
-
+  createContact() {
+    console.log('Create contact clicked');
   }
 
-  deleteContact(contact: Contact) {
+  deleteContact() {
+    this.contactService.deleteContact(this.contact.id);
+    this.router.navigate(['/contacts']);
+  }
 
+  cancelAction() {
+    this.router.navigate(['/contacts']);
   }
 }

@@ -9,8 +9,10 @@
 
   <mat-list>
 
-    <h3 matSubheader>Users</h3>
+    <h1 matSubheader>Contacts</h1>
 
     <ca-contact-list-item *ngFor="let contact of contacts" [contact]="contact" (click)="onContactSelected(contact)"></ca-contact-list-item>
 
   </mat-list>
+
+<button mat-raised-button (click)="onContactCreate()">Add User</button>
