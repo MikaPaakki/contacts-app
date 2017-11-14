@@ -47,6 +47,9 @@ export class ContactDetailsComponent implements OnInit {
 
   createContact() {
     console.log('Create contact clicked');
+    this.contactService.createContact(this.contact);
+    this.router.navigate(['/contacts']);
+
   }
 
   deleteContact() {

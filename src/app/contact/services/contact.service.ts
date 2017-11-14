@@ -42,6 +42,33 @@ export class ContactService {
     contacts[index] = contact;
     this.writeLocalStorageContacts(contacts);
   }
+  public createContact (contact: Contact): void {
+    // Read contacts from the local storage to a local variable (array)
+    const contacts: Contact[] = this.readLocalStorageContacts();
+    // Find current max. id value from existing contacts
+    console.log(contacts);
+    const ids = contacts.map(c => c.id); // See array map method documentation
+    console.log(ids);
+    // 1.
+    const maxId = ids.length > 0 ? Math.max(...ids) : 0; // See MDN Math.max documentation
+    console.log(maxId);
+    const newId = maxId + 1;
+
+    //( 2.
+    // const newId = ids.length > 0 ? Math.max(...ids) + 1 : 1;)
+
+    // Assign new id value for the new contact
+
+    console.log(contact);
+    contact.id = newId;
+    console.log(contact);
+
+    // Store new contact to the array (push)
+    contacts.push(contact);
+
+    // Write contacts to the local storage
+    this.writeLocalStorageContacts(contacts);
+  }
 
   getContactById(id: number): Contact {
     const contacts = this.readLocalStorageContacts();
