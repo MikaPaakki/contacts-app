@@ -29,8 +29,10 @@ export class ContactListComponent implements OnInit {
     console.log(contact);
     this.router.navigate(['/contact-details', contact.id]);
   }
-  onContactCreate(){
+  onContactCreate() {
     this.router.navigate(['/contact-details', 0]);
   }
-
+  openSidenav() {
+    this.router.navigate(['/contacts']);
+  }
 }
