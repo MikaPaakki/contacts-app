@@ -3,24 +3,27 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ContactsWebApi.Models;
+using ContactsWebApi.Repositories;
 
 namespace ContactsWebApi.Services
 {
     public class ContactService : IContactService
     {
+        private readonly IContactRepository _contactRepository;
+
+        public ContactService(IContactRepository contactRepository)
+        {
+            _contactRepository = contactRepository;
+        }
+
         public List<Contact> FindContacts()
         {
-            var contacts = new List<Contact>
-            {
-                new Contact(1, "Mika", "Paakki", "0443065347", "Tienhaara 27", "Imatra"),
-                new Contact(1, "Toka", "Kontakti", "045123456", "Uusikatu 2", "Lappeenranta")
-            };
-            return contacts;
+            return _contactRepository.GetAll();
         }
 
         public Contact FindContactById(int id)
         {
-            throw new NotImplementedException();
+            return _contactRepository.GetById(id);
         }
     }
 }

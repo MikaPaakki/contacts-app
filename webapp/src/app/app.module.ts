@@ -6,12 +6,15 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ContactListComponent} from './contact/contact-list/contact-list.component';
 import {ContactListItemComponent} from './contact/contact-list/contact-list-item/contact-list-item.component';
 import {MaterialComponentsModule} from './material-components/material-components.module';
-import {ContactService} from './contact/services/contact.service';
+import {ContactLocalStorageService} from './contact/services/contact-local-storage-service';
 import {RouterModule, Routes} from '@angular/router';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import { ContactDetailsComponent } from './contact/contact-details/contact-details.component';
 import {FormsModule} from '@angular/forms';
 import {ContactAddressPipe} from './contact/pipes/contact-address.pipe';
+import {ContactService} from './contact/services/contact.service';
+import {ContactHttpService} from './contact/services/contact-http.service';
+import {HttpClientModule} from '@angular/common/http';
 
 const routes: Routes = [
   {
@@ -43,9 +46,10 @@ const routes: Routes = [
     MaterialComponentsModule,
     RouterModule.forRoot(routes),
     FlexLayoutModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
-  providers: [ContactService],
+  providers: [ContactLocalStorageService, ContactService, ContactHttpService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
