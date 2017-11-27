@@ -10,6 +10,9 @@ namespace ContactsWebApi.Services
     {
         List<Contact> FindContacts();
         Contact FindContactById(int id);
+        void DeleteContactById(int id);
+        void CreateContact(Contact contact);
+        void EditContact(Contact contact);
 
     }
      

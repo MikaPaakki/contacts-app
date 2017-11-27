@@ -22,5 +22,11 @@ export class ContactHttpService {
   create(contact: Contact) {
     return this.http.post(this.url, contact);
   }
+  delete(id: number) {
+    return this.http.delete(this.url, id);
+  }
+  edit(contact: Contact) {
+    return this.http.put(this.url, contact);
+  }
 
 }

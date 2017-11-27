@@ -32,7 +32,30 @@ namespace ContactsWebApi.Controllers
             return new JsonResult(contact);
         }
 
-       
+        [HttpPost]        
+        public IActionResult CreateContact([FromBody] Contact contact)
+        {
+            _contactService.CreateContact(contact);
+            return new JsonResult(contact);
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+
+            _contactService.DeleteContactById(id);
+
+            return new OkResult();
+        }
+
+        [HttpPut]
+        public IActionResult Edit([FromBody] Contact contact)
+        {
+            _contactService.EditContact(contact);
+
+            return new OkResult();
+        }
+     
     }
 
 }
