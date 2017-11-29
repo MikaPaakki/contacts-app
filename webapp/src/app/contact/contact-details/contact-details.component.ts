@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Contact} from '../services/contact';
 import {ContactLocalStorageService} from '../services/contact-local-storage-service';
 import {ActivatedRoute, Router} from '@angular/router';
+import {ContactService} from '../services/contact.service';
 
 @Component({
   selector: 'ca-contact-details',
@@ -13,7 +14,7 @@ export class ContactDetailsComponent implements OnInit {
   contact: Contact;
   public action: string;
 
-  constructor(private contactService: ContactLocalStorageService, private activatedRoute: ActivatedRoute, private router: Router) {
+  constructor(private contactService: ContactService, private activatedRoute: ActivatedRoute, private router: Router) {
     this.action = '';
   }
 
@@ -30,31 +31,41 @@ export class ContactDetailsComponent implements OnInit {
         this.contact = new Contact();
       } else {
         this.action = 'Edit contact';
-        this.contact = this.findContactById(contactId);
+        // this.contact = this.findContactById(contactId);
+        this.contact = new Contact();
+        this.contactService.findContactsById(contactId).subscribe(contact => {
+          this.contact = contact;
+        });
       }
     });
   }
 
+  /*
   findContactById(contactId: number) {
     return this.contactService.getContactById(contactId);
 
   }
+  */
 
   editContact() {
-    this.contactService.editContact(this.contact);
-    this.router.navigate(['/contacts']);
+    this.contactService.editContact(this.contact).subscribe(() => {
+      this.router.navigate(['/contacts']);
+    });
   }
 
   createContact() {
     console.log('Create contact clicked');
-    this.contactService.createContact(this.contact);
-    this.router.navigate(['/contacts']);
+    this.contactService.createContact(this.contact).subscribe(() => {
+      this.router.navigate(['/contacts']);
+    });
 
   }
 
   deleteContact() {
-    this.contactService.deleteContact(this.contact.id);
-    this.router.navigate(['/contacts']);
+    this.contactService.deleteContact(this.contact.id).subscribe(() => {
+      this.router.navigate(['/contacts']);
+    });
+
   }
 
   cancelAction() {

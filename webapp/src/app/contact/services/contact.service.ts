@@ -13,27 +13,29 @@ export class ContactService {
 
   findContacts(): Observable<Contact[]> {
     // return this.localStorage.findContacts();
-    this.contactHttpService.get();
+    // this.contactHttpService.get();
     return this.contactHttpService.get();
   }
 
-  findContactsById(id: number) {
-    return this.localStorage.getContactById(id);
+  findContactsById(id: number): Observable<Contact> {
+    // return this.localStorage.getContactById(id);
+    return this.contactHttpService.getById(id);
   }
 
-  saveContact(contact: Contact) {
-    return this.localStorage.saveContact(contact);
-  }
+  /*saveContact(contact: Contact) {
+    return this.contactHttpService.saveContact(contact);
+  }*/
 
   editContact(contact: Contact) {
-    return this.localStorage.editContact(contact);
+    return this.contactHttpService.edit(contact);
   }
 
   deleteContact(id: number) {
-    return this.localStorage.deleteContact(id);
+    return this.contactHttpService.delete(id);
+    //return this.localStorage.deleteContact(id);
   }
 
   createContact(contact: Contact) {
-    return this.localStorage.createContact(contact);
+    return this.contactHttpService.create(contact);
   }
 }

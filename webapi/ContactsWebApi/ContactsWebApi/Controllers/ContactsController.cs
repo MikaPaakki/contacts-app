@@ -45,7 +45,8 @@ namespace ContactsWebApi.Controllers
 
             _contactService.DeleteContactById(id);
 
-            return new OkResult();
+            //return new OkResult();
+            return new NoContentResult();
         }
 
         [HttpPut]
@@ -55,7 +56,7 @@ namespace ContactsWebApi.Controllers
 
             return new OkResult();
         }
-     
+        //contacts-app authentication
     }
 
 }
