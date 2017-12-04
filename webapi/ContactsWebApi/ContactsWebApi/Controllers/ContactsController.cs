@@ -56,7 +56,6 @@ namespace ContactsWebApi.Controllers
 
             return new OkResult();
         }
-        //contacts-app authentication
     }
 
 }

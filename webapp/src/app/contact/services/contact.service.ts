@@ -7,7 +7,7 @@ import {Observable} from 'rxjs/Observable';
 @Injectable()
 export class ContactService {
 
-  constructor(private localStorage: ContactLocalStorageService, private contactHttpService: ContactHttpService){
+  constructor(private localStorage: ContactLocalStorageService, private contactHttpService: ContactHttpService) {
 
   }
 
