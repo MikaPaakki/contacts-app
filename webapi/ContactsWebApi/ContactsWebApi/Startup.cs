@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ContactsWebApi.Config;
 using ContactsWebApi.Repositories;
 using ContactsWebApi.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -26,12 +28,17 @@ namespace ContactsWebApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<IContactService, ContactService>();
-            services.AddSingleton<IContactRepository, ContactRepository>();
+            services.AddScoped<IContactRepository, ContactRepository>();
             services.AddCors(o => o.AddPolicy("ContactsAppPolicy", builder =>
             {
                 builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
             }));
             services.AddMvc();
+
+            services.AddDbContext<ContactsDbContext>(options =>
+            {
+                options.UseSqlServer(Configuration["ConnectionString"]);
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -42,7 +49,24 @@ namespace ContactsWebApi
                 app.UseDeveloperExceptionPage();
             }
             app.UseCors("ContactsAppPolicy");
+            InitializeDatabase(app);
             app.UseMvc();
+
+        }
+        private static void InitializeDatabase(IApplicationBuilder app)
+
+        {
+
+            using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
+
+            {
+
+                var context = serviceScope.ServiceProvider.GetRequiredService<ContactsDbContext>();
+
+                context.Database.EnsureCreated();
+
+            }
+
         }
     }
 }
