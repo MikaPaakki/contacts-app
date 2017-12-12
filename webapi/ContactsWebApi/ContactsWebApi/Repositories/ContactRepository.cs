@@ -25,16 +25,18 @@ namespace ContactsWebApi.Repositories
             //return _contacts;
         }
 
+        /*
         public ContactRepository GetById(int)
         {
             throw new NotImplementedException();
         }
+        */
 
-        public Contact Get(int Id)
+        public Contact Get(int id)
         {
             return _context.Contacts.FirstOrDefault(c => c.Id == id);
             //return _contacts.FirstOrDefault(c => c.Id == id);
-        }
+        } 
 
         public void CreateContact(Contact contact)
         {
@@ -59,12 +61,14 @@ namespace ContactsWebApi.Repositories
 
         private void Initialize()
         {
-            //_contacts = new List<Contact>
+            /*
+            _contacts = new List<Contact>
             {
                 new Contact(1, "Mika", "Paakki", "0443065347", "Tienhaara 27", "Imatra"),
                 new Contact(2, "Toka", "Kontakti", "045123456", "Uusikatu 2", "Lappeenranta"),
-                new Contact(3, "Kolmas","Kontakti", "045123456", "Uusikatu 2", "Lappeenranta")
+                new Contact(3, "Kolmas", "Kontakti", "045123456", "Uusikatu 2", "Lappeenranta")
             };
+            */
         }
     }
 }

@@ -23,7 +23,7 @@ namespace ContactsWebApi.Services
 
         public Contact FindContactById(int id)
         {
-            return _contactRepository.GetById(id);
+            return _contactRepository.Get(id);
         }
 
         public void DeleteContactById(int id)
