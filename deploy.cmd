@@ -90,8 +90,8 @@ echo Handling node.js deployment.
 
 :: 1. KuduSync
 IF /I "%IN_PLACE_DEPLOYMENT%" NEQ "1" (
-  call :ExecuteCmd "%KUDU_SYNC_CMD%" -v 50 -f "%DEPLOYMENT_SOURCE%" -t "%DEPLOYMENT_TARGET%" -n "%NEXT_MANIFEST_PATH%" -p "%PREVIOUS_MANIFEST_PATH%" -i ".git;.hg;.deployment;deploy.cmd"
-  IF !ERRORLEVEL! NEQ 0 goto error
+  call :ExecuteCmd "%KUDU_SYNC_CMD%" -v 50 -f "%DEPLOYMENT_SOURCE%" -t "%DEPLOYMENT_TARGET%" -n "%NEXT_MANIFEST_PATH%" -p "%PREVIOUS_MANIFEST_PATH%" -i ".git;.hg;.deployment;deploy.cmd"
+  IF !ERRORLEVEL! NEQ 0 goto error
 )
 
 :: 2. Select node version
@@ -99,10 +99,10 @@ call :SelectNodeVersion
 
 :: 3. Install npm packages
 IF EXIST "%DEPLOYMENT_TARGET%\package.json" (
-  pushd "%DEPLOYMENT_TARGET%"
-  call :ExecuteCmd !NPM_CMD! install
-  IF !ERRORLEVEL! NEQ 0 goto error
-  popd
+  pushd "%DEPLOYMENT_TARGET%"
+  call :ExecuteCmd !NPM_CMD! install
+  IF !ERRORLEVEL! NEQ 0 goto error
+  popd
 )
 
 :: 4. Angular Build
@@ -110,14 +110,13 @@ echo Handling Angular build
 echo Angular build command: %ANGULAR_BUILD_COMMAND%
 :: 4. Build ng app
 IF EXIST "%DEPLOYMENT_TARGET%\package.json" (
-  pushd "%DEPLOYMENT_TARGET%"
-  call :ExecuteCmd "!NODE_EXE!" ./node_modules/@angular/cli/bin/%ANGULAR_BUILD_COMMAND%
-  echo Angular webapp built using command: %ANGULAR_BUILD_COMMAND%
-  call :ExecuteCmd cp "%DEPLOYMENT_TARGET%"/web.config "%DEPLOYMENT_TARGET%"/dist/
-  IF !ERRORLEVEL! NEQ 0 goto error
-  popd
+  pushd "%DEPLOYMENT_TARGET%"
+  call :ExecuteCmd "!NODE_EXE!" ./node_modules/@angular/cli/bin/%ANGULAR_BUILD_COMMAND%
+  echo Angular webapp built using command: %ANGULAR_BUILD_COMMAND%
+  call :ExecuteCmd cp "%DEPLOYMENT_TARGET%"/web.config "%DEPLOYMENT_TARGET%"/dist/
+  IF !ERRORLEVEL! NEQ 0 goto error
+  popd
 )
-
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 goto end
