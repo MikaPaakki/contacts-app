@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using ContactsWebApi.Config;
 using ContactsWebApi.Repositories;
 using ContactsWebApi.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -29,10 +30,24 @@ namespace ContactsWebApi
         {
             services.AddScoped<IContactService, ContactService>();
             services.AddScoped<IContactRepository, ContactRepository>();
+            services.AddScoped<ITokenService, TokenService>();
             services.AddCors(o => o.AddPolicy("ContactsAppPolicy", builder =>
             {
                 builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
             }));
+
+
+            services.AddAuthentication(options =>
+                {
+                    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                })
+                .AddJwtBearer(options =>
+                {
+                    options.Audience = "3e5da221-1e0b-41fe-8eb0-f00168e009ec";
+                    options.Authority = "https://login.windows.net/83d93547-4157-41b1-bcb5-e1811c1816bd";
+                });
+
             services.AddMvc();
 
             services.AddDbContext<ContactsDbContext>(options =>
@@ -49,6 +64,7 @@ namespace ContactsWebApi
                 app.UseDeveloperExceptionPage();
             }
             app.UseCors("ContactsAppPolicy");
+            app.UseAuthentication();
             InitializeDatabase(app);
             app.UseMvc();
 
