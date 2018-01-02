@@ -9,29 +9,44 @@ import {MaterialComponentsModule} from './material-components/material-component
 import {ContactLocalStorageService} from './contact/services/contact-local-storage-service';
 import {RouterModule, Routes} from '@angular/router';
 import {FlexLayoutModule} from '@angular/flex-layout';
-import { ContactDetailsComponent } from './contact/contact-details/contact-details.component';
+import {ContactDetailsComponent} from './contact/contact-details/contact-details.component';
 import {FormsModule} from '@angular/forms';
 import {ContactAddressPipe} from './contact/pipes/contact-address.pipe';
 import {ContactService} from './contact/services/contact.service';
 import {ContactHttpService} from './contact/services/contact-http.service';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import {ToolbarComponent} from './layout/toolbar/toolbar.component';
+import {LoginComponent} from './user/login/login.component';
+import {AppLayoutComponent} from './layout/app-layout/app-layout.component';
+import {CaHttpInterceptor} from './config/ca-http-interceptor';
+import {UserService} from './user/services/user.service';
+import {AuthenticationService} from './user/services/authentication.service';
 
 const routes: Routes = [
   {
+    path: 'login',
+    component: LoginComponent
+  },
+  {
     path: '',
-    component: ContactListComponent
+    component: LoginComponent
   },
-
   {
-    path: 'contacts',
-    component: ContactListComponent
-  },
+    path: 'ca',
+    component: AppLayoutComponent,
+    children: [
+      {
+        path: 'contacts',
+        component: ContactListComponent
+      },
 
-  {
-    path: 'contact-details/:id',
-    component: ContactDetailsComponent
+      {
+        path: 'contact-details/:id',
+        component: ContactDetailsComponent
+      }
+    ]
   }
-]
+];
 
 @NgModule({
   declarations: [
@@ -39,7 +54,10 @@ const routes: Routes = [
     ContactListComponent,
     ContactListItemComponent,
     ContactDetailsComponent,
-    ContactAddressPipe
+    ContactAddressPipe,
+    ToolbarComponent,
+    LoginComponent,
+    AppLayoutComponent
   ],
   imports: [
     BrowserModule,
@@ -49,7 +67,18 @@ const routes: Routes = [
     FormsModule,
     HttpClientModule
   ],
-  providers: [ContactLocalStorageService, ContactService, ContactHttpService],
+  providers: [
+    ContactLocalStorageService,
+    ContactService,
+    UserService,
+    AuthenticationService,
+    ContactHttpService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: CaHttpInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
