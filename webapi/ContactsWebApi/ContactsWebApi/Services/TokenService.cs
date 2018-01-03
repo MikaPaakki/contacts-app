@@ -20,8 +20,8 @@ namespace ContactsWebApi.Services
             {
                 new KeyValuePair<string, string>("client_id", "3e5da221-1e0b-41fe-8eb0-f00168e009ec"),
                 new KeyValuePair<string, string>("resource", "3e5da221-1e0b-41fe-8eb0-f00168e009ec"),
-                new KeyValuePair<string, string>("username", "user-x@burnin81hotmail.onmicrosoft.com"),
-                new KeyValuePair<string, string>("password", "DopA2017"),
+                new KeyValuePair<string, string>("username", authenticationRequest.UserName),
+                new KeyValuePair<string, string>("password", authenticationRequest.Password),
                 new KeyValuePair<string, string>("grant_type", "password"),
                 new KeyValuePair<string, string>("client_secret", "WDrk4tGlH7ai2aAUTyl4Q+AFGeQVz2IHu2BrDwuRa58=")
             };

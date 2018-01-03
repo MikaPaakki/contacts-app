@@ -16,11 +16,14 @@ export class AuthenticationService {
       username: username,
       password: password
     }).map((response) => {
-      console.log(response) ;
+      console.log(response);
+      this.storeAccessToken(response);
     });
 
 }
   storeAccessToken(token) {
     localStorage.setItem('ca-token', JSON.stringify(token));
   }
+
+
 }

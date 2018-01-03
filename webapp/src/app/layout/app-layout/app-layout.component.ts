@@ -13,11 +13,11 @@ export class AppLayoutComponent {
   }
 
   showContactList() {
-    this.router.navigate(['/contacts']);
+    this.router.navigate(['/ca/contacts']);
   }
 
   showContactService() {
-    this.router.navigate(['/contact-details']);
+    this.router.navigate(['/ca/contact-details']);
   }
 
 }

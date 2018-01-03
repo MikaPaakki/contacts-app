@@ -32,12 +32,12 @@ export class ContactListComponent implements OnInit {
   onContactSelected(contact: Contact) {
     console.log('Selected contact:');
     console.log(contact);
-    this.router.navigate(['/contact-details', contact.id]);
+    this.router.navigate(['/ca/contact-details', contact.id]);
   }
   onContactCreate() {
-    this.router.navigate(['/contact-details', 0]);
+    this.router.navigate(['/ca/contact-details', 0]);
   }
   openSidenav() {
-    this.router.navigate(['/contacts']);
+    this.router.navigate(['/ca/contacts']);
   }
 }
