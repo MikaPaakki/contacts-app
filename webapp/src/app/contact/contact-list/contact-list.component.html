@@ -4,23 +4,10 @@
 
     <input matInput placeholder="Etunimi" value = "">
 
-  </mat-form-field>-->
+  </mat-form-field>
 
-  <mat-toolbar color="primary">
-    <span>Contacts application</span>
-  </mat-toolbar>
 
-  <mat-list>
-
-    <h1 matSubheader>Contacts</h1>
-
-    <ca-contact-list-item *ngFor="let contact of contacts" [contact]="contact" (click)="onContactSelected(contact)"></ca-contact-list-item>
-
-  </mat-list>
-
-<button mat-raised-button (click)="onContactCreate()">Add User</button>
-
-<mat-sidenav-container>
+  <mat-sidenav-container>
   <mat-sidenav mode="push" opened="true">Side navigation!</mat-sidenav>
 
   <div>
@@ -30,3 +17,20 @@
   </div>
 
 </mat-sidenav-container>
+
+
+
+  -->
+
+<mat-list>
+
+  <h1 matSubheader>Contacts</h1>
+
+  <ca-contact-list-item *ngFor="let contact of contacts" [contact]="contact" (click)="onContactSelected(contact)"></ca-contact-list-item>
+
+</mat-list>
+
+<button mat-raised-button (click)="onContactCreate()">Add User</button>
+
+
+

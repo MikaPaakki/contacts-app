@@ -47,17 +47,22 @@ namespace ContactsWebApi.Repositories
 
         public void DeleteById(int id)
         {
+            var contact = Get(id);
+            _context.Contacts.Remove(contact);
+            _context.SaveChanges();
             //int index = _contacts.FindIndex(c => c.Id == id);
             //_contacts.RemoveAt(index);
         }
 
         public void EditContact(Contact contact)
         {
+            _context.Contacts.Update(contact);
+            _context.SaveChanges();
             //int index = _contacts.FindIndex(c => c.Id == contact.Id);
             //_contacts[index] = contact;
         }
 
-        
+
 
         private void Initialize()
         {

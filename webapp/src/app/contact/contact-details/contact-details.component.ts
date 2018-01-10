@@ -49,26 +49,26 @@ export class ContactDetailsComponent implements OnInit {
 
   editContact() {
     this.contactService.editContact(this.contact).subscribe(() => {
-      this.router.navigate(['/contacts']);
+      this.router.navigate(['/ca/contacts']);
     });
   }
 
   createContact() {
     console.log('Create contact clicked');
     this.contactService.createContact(this.contact).subscribe(() => {
-      this.router.navigate(['/contacts']);
+      this.router.navigate(['/ca/contacts']);
     });
 
   }
 
   deleteContact() {
     this.contactService.deleteContact(this.contact.id).subscribe(() => {
-      this.router.navigate(['/contacts']);
+      this.router.navigate(['/ca/contacts']);
     });
 
   }
 
   cancelAction() {
-    this.router.navigate(['/contacts']);
+    this.router.navigate(['/ca/contacts']);
   }
 }

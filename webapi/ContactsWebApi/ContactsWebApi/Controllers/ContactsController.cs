@@ -56,7 +56,7 @@ namespace ContactsWebApi.Controllers
         {
             _contactService.EditContact(contact);
 
-            return new OkResult();
+            return new JsonResult(contact);
         }
     }
 
